@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathspace Auto Solver</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <div class="popup-header">
+      <div class="logo-row">
+        <div class="logo-icon">⚡</div>
+        <div class="logo-text">
+          <h1>Mathspace Auto Solver</h1>
+          <span class="version">v1.0.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main View (shown when licensed) -->
+    <div id="main-view" class="view hidden">
+      <!-- Status Card -->
+      <div class="card status-card">
+        <div class="status-row">
+          <div class="status-indicator">
+            <div class="status-dot" id="status-dot"></div>
+            <span id="status-text">Idle</span>
+          </div>
+          <div class="progress-badge" id="progress-badge">0/0</div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Power Toggle -->
+      <div class="card power-card">
+        <button class="power-btn" id="power-btn">
+          <div class="power-icon" id="power-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+              <line x1="12" y1="2" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <span id="power-label">Start Solving</span>
+        </button>
+      </div>
+
+      <!-- Speed Control -->
+      <div class="card">
+        <label class="card-label">Speed</label>
+        <div class="speed-control">
+          <button class="speed-btn" data-speed="careful">🐢 Careful</button>
+          <button class="speed-btn active" data-speed="normal">⚡ Normal</button>
+          <button class="speed-btn" data-speed="fast">🚀 Fast</button>
+        </div>
+      </div>
+
+      <!-- API Key Section -->
+      <div class="card">
+        <div class="card-label-row">
+          <label class="card-label">Gemini API Key</label>
+          <span class="api-status" id="api-status">Not set</span>
+        </div>
+        <div class="input-row">
+          <input type="password" id="api-key-input" placeholder="Paste your API key..." class="text-input">
+          <button class="btn-small" id="save-api-key">Save</button>
+        </div>
+        <button class="link-btn" id="api-help-btn">📖 How to get a free API key (60 seconds)</button>
+      </div>
+
+      <!-- License Info -->
+      <div class="card">
+        <div class="card-label-row">
+          <label class="card-label">License</label>
+          <span class="license-badge" id="license-badge">Active</span>
+        </div>
+        <button class="link-btn danger" id="deactivate-btn">Deactivate license</button>
+      </div>
+    </div>
+
+    <!-- License Activation View (shown when no license) -->
+    <div id="license-view" class="view">
+      <div class="card">
+        <div class="lock-icon">🔒</div>
+        <h2 class="card-title">Activate Your License</h2>
+        <p class="card-desc">Enter your license key to unlock Mathspace Auto Solver.</p>
+        <div class="input-row">
+          <input type="text" id="license-key-input" placeholder="XXXX-XXXX-XXXX-XXXX" class="text-input" spellcheck="false">
+        </div>
+        <button class="btn-primary" id="activate-btn">Activate</button>
+        <div class="error-msg hidden" id="license-error"></div>
+        <div class="separator">
+          <span>Don't have a license?</span>
+        </div>
+        <a class="btn-outline" id="purchase-link" href="#" target="_blank">
+          Purchase — from $1/mo
+        </a>
+      </div>
+    </div>
+
+    <!-- API Key Guide Modal -->
+    <div id="api-guide-modal" class="modal hidden">
+      <div class="modal-content">
+        <button class="modal-close" id="close-guide">✕</button>
+        <h2>🔑 Get Your Free Gemini API Key</h2>
+        <p class="modal-subtitle">Takes about 60 seconds. Completely free — no credit card needed.</p>
+        
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Go to Google AI Studio</h3>
+            <p>Open <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></p>
+            <p class="step-note">Sign in with your Google account if prompted.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Create an API Key</h3>
+            <p>Click <strong>"Create API key"</strong> and select any project (or create a new one).</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Copy & Paste</h3>
+            <p>Copy the API key and paste it into the field above. That's it!</p>
+            <p class="step-note">⚡ The free tier gives you ~250 requests/day — more than enough for homework.</p>
+          </div>
+        </div>
+
+        <div class="guide-footer">
+          <p>⚠️ Keep your API key private. Never share it publicly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
